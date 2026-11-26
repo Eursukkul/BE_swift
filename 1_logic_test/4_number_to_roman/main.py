@@ -18,6 +18,17 @@ output = number can not less than 0
 
 
 class Solution:
+    SYMBOLS = [
+        (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
+        (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
+        (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I"),
+    ]
 
     def number_to_roman(self, number: int) -> str:
-        pass
+        if number < 0:
+            return "number can not less than 0"
+        roman_text = ""
+        for value, symbol in self.SYMBOLS:
+            count, number = divmod(number, value)
+            roman_text += symbol * count
+        return roman_text
